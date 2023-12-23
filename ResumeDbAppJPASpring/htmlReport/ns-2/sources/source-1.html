@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CountryDaoImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.company.dao.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: CountryDaoImpl (com.company.dao.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CountryDaoImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+&nbsp; * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+&nbsp; */
+&nbsp;package com.company.dao.impl;
+&nbsp;
+&nbsp;import com.company.dao.inter.AbstractDAO;
+&nbsp;import com.company.dao.inter.CountryDaoInter;
+&nbsp;import com.company.entity.Country;
+&nbsp;
+&nbsp;import java.sql.Connection;
+&nbsp;import java.sql.ResultSet;
+&nbsp;import java.sql.Statement;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; *
+&nbsp; * @author Dell
+&nbsp; */
+<b class="nc">&nbsp;public class CountryDaoImpl extends AbstractDAO implements CountryDaoInter {</b>
+&nbsp;
+&nbsp;    private Country getCountry(ResultSet rs) throws Exception{
+<b class="nc">&nbsp;        int id = rs.getInt(&quot;id&quot;);</b>
+<b class="nc">&nbsp;        String name = rs.getString(&quot;name&quot;);</b>
+<b class="nc">&nbsp;        String nationality = rs.getString(&quot;nationality&quot;);</b>
+&nbsp;        
+<b class="nc">&nbsp;        return new Country(id, name, nationality);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Country&gt; getAll() {
+<b class="nc">&nbsp;        List&lt;Country&gt; result = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        try ( Connection c = connect();) {</b>
+<b class="nc">&nbsp;            Statement stmt = c.createStatement();</b>
+<b class="nc">&nbsp;            stmt.execute(&quot;select * from country&quot;);</b>
+<b class="nc">&nbsp;            ResultSet rs = stmt.getResultSet();</b>
+<b class="nc">&nbsp;            while (rs.next()) {</b>
+<b class="nc">&nbsp;                result.add(getCountry(rs));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;            ex.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-17 16:50</div>
+</div>
+</body>
+</html>

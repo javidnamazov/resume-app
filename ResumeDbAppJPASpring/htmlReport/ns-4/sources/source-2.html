@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EmploymentHistory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.company.entity</a>
+</div>
+
+<h1>Coverage Summary for Class: EmploymentHistory (com.company.entity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EmploymentHistory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+&nbsp; * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+&nbsp; */
+&nbsp;package com.company.entity;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;import javax.xml.bind.annotation.XmlRootElement;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dell
+&nbsp; */
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;employment_history&quot;)
+&nbsp;@XmlRootElement
+&nbsp;//@NamedQueries({
+&nbsp;//    @NamedQuery(name = &quot;EmploymentHistory.findAll&quot;, query = &quot;SELECT e FROM EmploymentHistory e&quot;),
+&nbsp;//    @NamedQuery(name = &quot;EmploymentHistory.findById&quot;, query = &quot;SELECT e FROM EmploymentHistory e WHERE e.id = :id&quot;),
+&nbsp;//    @NamedQuery(name = &quot;EmploymentHistory.findByHeader&quot;, query = &quot;SELECT e FROM EmploymentHistory e WHERE e.header = :header&quot;),
+&nbsp;//    @NamedQuery(name = &quot;EmploymentHistory.findByBeginDate&quot;, query = &quot;SELECT e FROM EmploymentHistory e WHERE e.beginDate = :beginDate&quot;),
+&nbsp;//    @NamedQuery(name = &quot;EmploymentHistory.findByEndDate&quot;, query = &quot;SELECT e FROM EmploymentHistory e WHERE e.endDate = :endDate&quot;)})
+&nbsp;public class EmploymentHistory implements Serializable {
+&nbsp;
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Basic(optional = false)
+&nbsp;    @Column(name = &quot;id&quot;)
+&nbsp;    private Integer id;
+&nbsp;    @Basic(optional = false)
+&nbsp;    @Column(name = &quot;header&quot;)
+&nbsp;    private String header;
+&nbsp;    @Basic(optional = false)
+&nbsp;    @Column(name = &quot;begin_date&quot;)
+&nbsp;    @Temporal(TemporalType.DATE)
+&nbsp;    private Date beginDate;
+&nbsp;    @Column(name = &quot;end_date&quot;)
+&nbsp;    @Temporal(TemporalType.DATE)
+&nbsp;    private Date endDate;
+&nbsp;    @Basic(optional = false)
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;job_description&quot;)
+&nbsp;    private String jobDescription;
+&nbsp;    @JoinColumn(name = &quot;user_id&quot;, referencedColumnName = &quot;id&quot;)
+&nbsp;    @ManyToOne(optional = false)
+&nbsp;    private User user;
+&nbsp;
+<b class="nc">&nbsp;    public EmploymentHistory() {</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public EmploymentHistory(Integer id) {</b>
+<b class="nc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public EmploymentHistory(Integer id, String header, Date beginDate, String jobDescription) {</b>
+<b class="nc">&nbsp;        this.id = id;</b>
+<b class="nc">&nbsp;        this.header = header;</b>
+<b class="nc">&nbsp;        this.beginDate = beginDate;</b>
+<b class="nc">&nbsp;        this.jobDescription = jobDescription;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getId() {
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(Integer id) {
+<b class="nc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getHeader() {
+<b class="nc">&nbsp;        return header;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setHeader(String header) {
+<b class="nc">&nbsp;        this.header = header;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getBeginDate() {
+<b class="nc">&nbsp;        return beginDate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBeginDate(Date beginDate) {
+<b class="nc">&nbsp;        this.beginDate = beginDate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getEndDate() {
+<b class="nc">&nbsp;        return endDate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEndDate(Date endDate) {
+<b class="nc">&nbsp;        this.endDate = endDate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getJobDescription() {
+<b class="nc">&nbsp;        return jobDescription;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setJobDescription(String jobDescription) {
+<b class="nc">&nbsp;        this.jobDescription = jobDescription;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public User getUser() {
+<b class="nc">&nbsp;        return user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUser(User user) {
+<b class="nc">&nbsp;        this.user = user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        int hash = 0;</b>
+<b class="nc">&nbsp;        hash += (id != null ? id.hashCode() : 0);</b>
+<b class="nc">&nbsp;        return hash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object object) {
+&nbsp;        // TODO: Warning - this method won&#39;t work in the case the id fields are not set
+<b class="nc">&nbsp;        if (!(object instanceof EmploymentHistory)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        EmploymentHistory other = (EmploymentHistory) object;</b>
+<b class="nc">&nbsp;        if ((this.id == null &amp;&amp; other.id != null) || (this.id != null &amp;&amp; !this.id.equals(other.id))) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;com.company.entity.EmploymentHistory[ id=&quot; + id + &quot; ]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-17 16:50</div>
+</div>
+</body>
+</html>

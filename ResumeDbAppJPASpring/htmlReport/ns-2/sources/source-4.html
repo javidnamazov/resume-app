@@ -1,0 +1,286 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > com.company.UserDaoImpl2IT</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.company.dao.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: com.company.UserDaoImpl2IT (com.company.dao.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">com.company.UserDaoImpl2IT</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+&nbsp; * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+&nbsp; */
+&nbsp;package com.company.dao.impl;
+&nbsp;
+&nbsp;import com.company.entity.User;
+&nbsp;import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import javax.persistence.EntityManager;
+&nbsp;import javax.persistence.PersistenceContext;
+&nbsp;import javax.persistence.Query;
+&nbsp;import javax.persistence.criteria.CriteriaBuilder;
+&nbsp;import javax.persistence.criteria.CriteriaQuery;
+&nbsp;import javax.persistence.criteria.Root;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * @author Dell
+&nbsp; */
+&nbsp;@Repository(value = &quot;userDao2&quot;)
+&nbsp;public class com.company.UserDaoImpl2IT implements UserRepositoryCustom {
+&nbsp;
+<b class="nc">&nbsp;    public com.company.UserDaoImpl2IT() {</b>
+<b class="nc">&nbsp;        System.out.println(&quot;com.company.UserDaoImpl2IT&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PersistenceContext
+&nbsp;    EntityManager em;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;User&gt; getAll(String name, String surname, Integer nationalityId) {
+<b class="nc">&nbsp;        String jpql = &quot;select u from User u where 1=1&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (name != null &amp;&amp; !name.trim().isEmpty()) {</b>
+<b class="nc">&nbsp;            jpql += &quot; and u.name=:name&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (surname != null &amp;&amp; !surname.trim().isEmpty()) {</b>
+<b class="nc">&nbsp;            jpql += &quot; and u.surname=:surname&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (nationalityId != null) {</b>
+<b class="nc">&nbsp;            jpql += &quot; and u.nationality.id=:nid&quot;;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Query query = em.createQuery(jpql, User.class);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (name != null &amp;&amp; !name.trim().isEmpty()) {</b>
+<b class="nc">&nbsp;            query.setParameter(&quot;name&quot;, name);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (surname != null &amp;&amp; !surname.trim().isEmpty()) {</b>
+<b class="nc">&nbsp;            query.setParameter(&quot;surname&quot;, surname);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (nationalityId != null) {</b>
+<b class="nc">&nbsp;            query.setParameter(&quot;nid&quot;, nationalityId);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return query.getResultList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //    @Override
+&nbsp;//    public User findByEmailAndPassword(String email, String password) {
+&nbsp;//        Query q = em.createQuery(&quot;select u from User u where u.email=:e and u.password=:p&quot;, User.class);
+&nbsp;//        q.setParameter(&quot;e&quot;, email);
+&nbsp;//        q.setParameter(&quot;p&quot;, password);
+&nbsp;//
+&nbsp;//        List&lt;User&gt; list = q.getResultList();
+&nbsp;//
+&nbsp;//        if (list.size() == 1) {
+&nbsp;//            return list.get(0);
+&nbsp;//        }
+&nbsp;//
+&nbsp;//        return null;
+&nbsp;//    }
+&nbsp;//    
+&nbsp;    @Override
+&nbsp;    public User findByEmailAndPassword(String email, String password) {
+<b class="nc">&nbsp;        CriteriaBuilder cb = em.getCriteriaBuilder();</b>
+<b class="nc">&nbsp;        CriteriaQuery&lt;User&gt; q1 = cb.createQuery(User.class);</b>
+<b class="nc">&nbsp;        Root&lt;User&gt; postRoot = q1.from(User.class);</b>
+<b class="nc">&nbsp;        CriteriaQuery&lt;User&gt; q2 = q1.where(cb.equal(postRoot.get(&quot;email&quot;), email), cb.equal(postRoot.get(&quot;password&quot;), password));</b>
+&nbsp;
+<b class="nc">&nbsp;        Query query = em.createQuery(q2);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;User&gt; list = query.getResultList();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (list.size() == 1) {</b>
+<b class="nc">&nbsp;            return list.get(0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //jpql
+&nbsp;//    @Override
+&nbsp;//    public User findByEmail(String email) {
+&nbsp;//        Query q = em.createQuery(&quot;select u from User u where u.email=:e&quot;, User.class);
+&nbsp;//        q.setParameter(&quot;e&quot;, email);
+&nbsp;//
+&nbsp;//        List&lt;User&gt; list = q.getResultList();
+&nbsp;//
+&nbsp;//        if (list.size() == 1) {
+&nbsp;//            return list.get(0);
+&nbsp;//        }
+&nbsp;//
+&nbsp;//        return null;
+&nbsp;//    }
+&nbsp;//    
+&nbsp;    //CriteriaBuilder
+&nbsp;//    @Override  
+&nbsp;//    public User findByEmail(String email) {
+&nbsp;//        CriteriaBuilder cb = em.getCriteriaBuilder();
+&nbsp;//        CriteriaQuery&lt;User&gt; q1 = cb.createQuery(User.class);
+&nbsp;//        Root&lt;User&gt; postRoot = q1.from(User.class);
+&nbsp;//        CriteriaQuery&lt;User&gt; q2 = q1.where(cb.equal(postRoot.get(&quot;email&quot;), email));
+&nbsp;//
+&nbsp;//        Query query = em.createQuery(q2);
+&nbsp;//        
+&nbsp;//        List&lt;User&gt; list = query.getResultList();
+&nbsp;//
+&nbsp;//        if (list.size() == 1) {
+&nbsp;//            return list.get(0);
+&nbsp;//        }
+&nbsp;//
+&nbsp;//        return null;
+&nbsp;//    }
+&nbsp;//
+&nbsp;    //NamedQuery
+&nbsp;//    @Override
+&nbsp;//    public User findByEmail(String email) {
+&nbsp;//        Query query = em.createNamedQuery(&quot;User.findByEmail&quot;, User.class);
+&nbsp;//        query.setParameter(&quot;email&quot;, email);
+&nbsp;//
+&nbsp;//        List&lt;User&gt; list = query.getResultList();
+&nbsp;//        if (list.size() == 1) {
+&nbsp;//            return list.get(0);
+&nbsp;//        }
+&nbsp;//
+&nbsp;//        return null;
+&nbsp;//    }
+&nbsp;//
+&nbsp;    //Native SQL
+&nbsp;    @Override
+&nbsp;    public User findByEmail(String email) {
+<b class="nc">&nbsp;        Query query = em.createNativeQuery(&quot;select * from user where email = ?&quot;, User.class);</b>
+<b class="nc">&nbsp;        query.setParameter(1, email);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;User&gt; list = query.getResultList();</b>
+<b class="nc">&nbsp;        if (list.size() == 1) {</b>
+<b class="nc">&nbsp;            return list.get(0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public User getById(int userId) {
+<b class="nc">&nbsp;        User u = em.find(User.class, userId);</b>
+<b class="nc">&nbsp;        return u;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static BCryptPasswordEncoder crypt = new BCryptPasswordEncoder();</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean add(User u) {
+<b class="nc">&nbsp;        u.setPassword(crypt.encode(u.getPassword()));</b>
+<b class="nc">&nbsp;        em.persist(u);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean update(User u) {
+<b class="nc">&nbsp;        em.merge(u);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean remove(int id) {
+<b class="nc">&nbsp;        User u = em.find(User.class, id);</b>
+<b class="nc">&nbsp;        em.remove(u);</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-17 16:50</div>
+</div>
+</body>
+</html>
